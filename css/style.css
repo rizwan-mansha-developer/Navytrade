@@ -974,6 +974,10 @@
   font-size: 18px;
 }
 
+.data-accordion-button {
+  color: #23584a;
+}
+
 .faq-section
   .accordion
   .accordion-item
