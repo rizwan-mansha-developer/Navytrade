@@ -1,27 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Page</title>
-    <link rel="stylesheet" href="css/loginStyle.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/loginStyle.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+  <body>
     <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-        <p id="errorMessage" class="error-message"></p>
+      <h2>Login</h2>
+      <form
+        id="loginForm"
+        action="http://httpbin.org/post"
+        method="POST"
+        onsubmit="return validateCaptcha();"
+      >
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div
+          class="g-recaptcha"
+          data-sitekey="6LetsCAqAAAAABQBvEwg29b3jibA31piiiXnHzfb"
+        ></div>
+        <br /><br />
+        <button type="submit">Login</button>
+      </form>
+      <p id="errorMessage" class="error-message"></p>
     </div>
-    <script src="scripts.js"></script>
-</body>
+    <script type="text/javascript">
+      function validateCaptcha() {
+        var response = grecaptcha.getResponse();
+        if (response.length === 0) {
+          alert("Please complete the CAPTCHA");
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
 </html>
